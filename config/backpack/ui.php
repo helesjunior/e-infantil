@@ -46,7 +46,7 @@ return [
     // ----
 
     // Project name - shown in the window title
-    'project_name' => 'Passos - Programa de Atenção à Saúde Ocupacional do Servidor',
+    'project_name' => 'E-Infantil - Sistema de Gestão do Espaço Infantil',
 
     // Content of the HTML meta robots tag to prevent indexing and link following
     'meta_robots_content' => 'noindex, nofollow',
@@ -63,7 +63,7 @@ return [
     'home_link' => '',
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo' => 'Passos',
+    'project_logo' => '<b>E</b>-Infantil',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
@@ -73,10 +73,10 @@ return [
     // ------
 
     // Developer or company name. Shown in footer.
-    'developer_name' => 'assefaz.org.br',
+    'developer_name' => 'ccbdf.org.br',
 
     // Developer website. Link in footer. Type false if you want to hide it.
-    'developer_link' => 'https://www.assefaz.org.br',
+    'developer_link' => 'https://www.ccbdf.org.br/',
 
     // Show powered by Laravel Backpack in the footer? true/false
     'show_powered_by' => false,

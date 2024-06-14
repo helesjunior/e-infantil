@@ -43,17 +43,6 @@ return new class extends Migration
         \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_codigo_itens_editar', 'guard_name' => 'web']);
         \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_codigo_itens_deletar', 'guard_name' => 'web']);
 
-        \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_tuss_acesso', 'guard_name' => 'web']);
-        \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_tuss_criar', 'guard_name' => 'web']);
-        \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_tuss_editar', 'guard_name' => 'web']);
-        \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_tuss_deletar', 'guard_name' => 'web']);
-
-        \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_cbo_acesso', 'guard_name' => 'web']);
-        \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_cbo_criar', 'guard_name' => 'web']);
-        \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_cbo_editar', 'guard_name' => 'web']);
-        \Spatie\Permission\Models\Permission::create(['name' => 'administracao_outros_cbo_deletar', 'guard_name' => 'web']);
-
-
         $role = \Spatie\Permission\Models\Role::create(['name' => 'Administrador Master', 'guard_name' => 'web']);
 
         $role->givePermissionTo(\Spatie\Permission\Models\Permission::all());
@@ -61,7 +50,7 @@ return new class extends Migration
         $user = \App\Models\User::create([
             'cpf' => '11111111111',
             'name' => 'Usuário Administrador',
-            'email' => 'admin@assefaz.org.br',
+            'email' => 'admin@ccbdf.org.br',
             'password' => Hash::make('123456'),
         ]);
 

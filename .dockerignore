@@ -1,0 +1,7 @@
+.*
+!.devcontainer
+!.env.example
+!.vscode/
+
+# Ignora arquivos de backup do banco de dados
+postgres_data_backups

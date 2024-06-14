@@ -1,0 +1,26 @@
+version: "3.7"
+
+x-volumes: &volumes
+  volumes:
+    - .:/var/www/html/e-infantil
+    - ~/.ssh:/root/.ssh/
+services:
+  app:
+    <<: *volumes
+    shm_size: "1gb"
+  pgadmin:
+    container_name: pgadmin4_container
+    networks:
+     - backend
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    user: root
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin:rw
+      - ./postgres_data_backups:/var/lib/pgadmin/storage/admin_admin.com
+volumes:
+  pgadmin_data:

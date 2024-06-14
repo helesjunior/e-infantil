@@ -1,0 +1,7 @@
+##############################################
+####### NÃO REMOVER ESTA PASTA DO GIT ########
+##############################################
+# ./postgres_data_backup foi adicionado na árvore do git
+# para corrigir problema com permissão da pasta ao criar os containers
+*
+!.gitignore

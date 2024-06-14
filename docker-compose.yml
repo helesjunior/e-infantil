@@ -1,0 +1,50 @@
+version: "3.7"
+
+x-app: &app
+  build:
+   context: .
+   dockerfile: ./compose/php/Dockerfile
+  networks:
+   - backend
+  environment:
+   POSTGRES_DB: einfantil
+   POSTGRES_HOST: einfantil-postgres
+   POSTGRES_PASSWORD: einfantil
+   PHP_MEMORY_LIMIT: 2G
+  volumes:
+   - ./src:/var/www/html/
+  ports:
+   - "80:80"
+  restart: unless-stopped
+services:
+  app:
+   <<: *app
+   command: sleep infinity
+
+  e-infantil-postgres:
+    build:
+      context: .
+      dockerfile: ./compose/postgres/Dockerfile
+    networks:
+     - backend
+    command: postgres -c config_file=/etc/postgres/postgresql.conf
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_MULTIPLE_DATABASES: einfantil
+      POSTGRES_USER: einfantil
+      POSTGRES_PASSWORD: einfantil
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - ./postgres_data_backups:/home
+      - db_data:/var/lib/postgresql/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+         size: "1000000000" # 1GB
+volumes:
+  db_data:
+networks:
+ backend:
+  driver: bridge

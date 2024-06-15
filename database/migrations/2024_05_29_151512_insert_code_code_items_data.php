@@ -33,6 +33,37 @@ return new class extends Migration
             'description' => 'Usuário Instituição',
             'is_visible' => true
         ]);
+
+
+        $code = \App\Models\Code::create(['description' => 'Tipo Nível Hierarquia', 'is_visible' => false]);
+
+        \App\Models\CodeItem::create([
+            'code_id' => $code->id,
+            'short_description' => '1',
+            'description' => 'Nível 1 (CCB Brás)',
+            'is_visible' => true
+        ]);
+
+        \App\Models\CodeItem::create([
+            'code_id' => $code->id,
+            'short_description' => '2',
+            'description' => 'Nível 2 (Regional)',
+            'is_visible' => true
+        ]);
+
+        \App\Models\CodeItem::create([
+            'code_id' => $code->id,
+            'short_description' => '3',
+            'description' => 'Nível 3 (Administração)',
+            'is_visible' => true
+        ]);
+
+        \App\Models\CodeItem::create([
+            'code_id' => $code->id,
+            'short_description' => '4',
+            'description' => 'Nível 4 (Setor)',
+            'is_visible' => true
+        ]);
     }
 
     /**

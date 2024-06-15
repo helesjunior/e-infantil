@@ -2,36 +2,46 @@
 
 namespace App\Models;
 
+use App\Models\Traits\LogsActivity;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CodeItem extends Model
+class Church extends Model
 {
     use CrudTrait;
     use HasFactory;
     use LogsActivity;
-    use softDeletes;
+    use SoftDeletes;
 
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-    protected static $logFillable = true;
-    protected static $logName = 'code_items';
 
-    protected $table = 'code_items';
+    protected $table = 'churches';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
-        'code_id',
-        'short_description',
-        'description',
-        'is_visible'
+        'structure_id',
+        'name',
+        'address',
+        'zip_code',
+        'state_id',
+        'city_id',
+        'ei_operating',
+        'computer',
+        'printer',
+        'internet',
+        'tatami',
+        'white_board',
+        'cabinet',
+        'children_tables',
+        'children_chairs',
+        'status',
     ];
     // protected $hidden = [];
 
@@ -41,23 +51,24 @@ class CodeItem extends Model
     |--------------------------------------------------------------------------
     */
 
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function code()
+    public function structure()
     {
-        return $this->belongsTo(Code::class);
+        return $this->belongsTo(Structure::class, 'structure_id');
+    }
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
     }
 
-
-
-    public function structures()
-    {
-        return $this->hasMany(Structure::class, 'level_id');
-    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -69,10 +80,7 @@ class CodeItem extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-    public function getCodeDescriptionAttribute($value)
-    {
-        return $this->code->description;
-    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

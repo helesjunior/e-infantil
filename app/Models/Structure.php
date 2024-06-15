@@ -2,36 +2,34 @@
 
 namespace App\Models;
 
+use App\Models\Traits\LogsActivity;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CodeItem extends Model
+class Structure extends Model
 {
     use CrudTrait;
     use HasFactory;
     use LogsActivity;
-    use softDeletes;
+    use SoftDeletes;
 
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-    protected static $logFillable = true;
-    protected static $logName = 'code_items';
 
-    protected $table = 'code_items';
+    protected $table = 'structure';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
-        'code_id',
-        'short_description',
+        'parent_id',
         'description',
-        'is_visible'
+        'level_id',
+        'status'
     ];
     // protected $hidden = [];
 
@@ -41,22 +39,25 @@ class CodeItem extends Model
     |--------------------------------------------------------------------------
     */
 
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function code()
+    public function parent()
     {
-        return $this->belongsTo(Code::class);
+        return $this->belongsTo(Structure::class,'parent_id');
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(CodeItem::class,'level_id');
     }
 
 
-
-    public function structures()
+    public function parents()
     {
-        return $this->hasMany(Structure::class, 'level_id');
+        return $this->hasMany(Structure::class,'parent_id');
     }
     /*
     |--------------------------------------------------------------------------
@@ -69,10 +70,11 @@ class CodeItem extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-    public function getCodeDescriptionAttribute($value)
+    public function getParentDescriptionAttribute($value)
     {
-        return $this->code->description;
+        return @$this->parent->description;
     }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

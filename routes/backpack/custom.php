@@ -18,9 +18,9 @@ Route::group([
 ], function () { // custom admin routes
 
     //Fetchs Routes
-    Route::post('/provider/fetch/city', '\App\Http\Controllers\Register\ProviderCrudController@fetchCity');
-    Route::post('/provider/fetch/cbo', '\App\Http\Controllers\Register\ProviderCrudController@fetchCbo');
-    Route::get('/contract/fetch/cbo', '\App\Http\Controllers\Register\ContractCrudController@fetchCbo');
+    Route::post('/church/fetch/city', '\App\Http\Controllers\Admin\ChurchCrudController@fetchCity');
+//    Route::post('/provider/fetch/cbo', '\App\Http\Controllers\Register\ProviderCrudController@fetchCbo');
+//    Route::get('/contract/fetch/cbo', '\App\Http\Controllers\Register\ContractCrudController@fetchCbo');
 
 //    Route::group([
 //        'prefix' => 'api',
@@ -40,8 +40,8 @@ Route::group([
         Route::crud('usuario', 'UserCrudController');
         Route::crud('codigo', 'CodeCrudController');
         Route::crud('codigo/{code}/item', 'CodeItemCrudController');
-        Route::crud('tuss', 'TussCrudController');
-        Route::crud('cbo', 'CboCrudController');
+        Route::crud('estrutura', 'StructureCrudController');
+        Route::crud('igreja', 'ChurchCrudController');
     });
 
     Route::group([

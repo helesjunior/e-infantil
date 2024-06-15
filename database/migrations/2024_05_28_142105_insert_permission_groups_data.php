@@ -50,7 +50,7 @@ return new class extends Migration
         $user = \App\Models\User::create([
             'cpf' => '11111111111',
             'name' => 'Usuário Administrador',
-            'email' => 'admin@ccbdf.org.br',
+            'email' => 'ccb@ccb',
             'password' => Hash::make('123456'),
         ]);
 

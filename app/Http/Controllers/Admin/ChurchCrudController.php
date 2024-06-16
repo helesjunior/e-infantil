@@ -205,68 +205,65 @@ class ChurchCrudController extends CrudController
                 ],
                 'tab' => 'Espaço Infantil',
             ],
-            [   // CustomHTML
-                'name'  => 'separator',
-                'type'  => 'custom_html',
-                'value' => '<label>Informações Adicionais</label><hr style="margin: 0;"/>',
-                'tab' => 'Espaço Infantil',
-            ],
-            [   // Checkbox
-                'name'  => 'computer',
-                'label' => 'Tem Computador',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
-                'tab' => 'Espaço Infantil',
-            ],
-            [   // Checkbox
-                'name'  => 'printer',
-                'label' => 'Tem Impressora',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
-                'tab' => 'Espaço Infantil',
-            ],
-            [   // Checkbox
-                'name'  => 'internet',
-                'label' => 'Tem Internet',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
-                'tab' => 'Espaço Infantil',
-            ],
-            [   // Checkbox
-                'name'  => 'tatami',
-                'label' => 'Tem Tatame Emborrachado',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
-                'tab' => 'Espaço Infantil',
-            ],
-            [   // Checkbox
-                'name'  => 'white_board',
-                'label' => 'Tem Quadro Branco',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
-                'tab' => 'Espaço Infantil',
-            ],
-            [   // Checkbox
-                'name'  => 'cabinet',
-                'label' => 'Tem Armário',
-                'type'  => 'checkbox',
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
-                'tab' => 'Espaço Infantil',
-            ],
-            [   // Checkbox
-                'name'  => 'children_tables',
-                'label' => 'Qtd. Mesas',
-                'type'  => 'number',
-                'attributes' => ["step" => 'false'],
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
-                'tab' => 'Espaço Infantil',
-            ],
-            [   // Checkbox
-                'name'  => 'children_chairs',
-                'label' => 'Qtd. Cadeiras',
-                'type'  => 'number',
-                'attributes' => ["step" => 'false'],
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
+            [   // repeatable
+                'name' => 'items',
+                'label' => 'Itens do Espaço Infantil',
+                'type' => 'repeatable',
+                'subfields' => [ // also works as: "fields"
+                    [
+                        'label' => "Tipo",
+                        'type' => 'select2',
+                        'name' => 'item_type_id', // the method that defines the relationship in your Model
+                        'entity' => 'itemtype', // the method that defines the relationship in your Model
+                        'model' => "App\Models\CodeItem", // foreign key model
+                        'attribute' => 'description', // foreign key attribute that is shown to user
+                        'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+                        'select_all' => true, // show Select All and Clear buttons?
+                        'wrapperAttributes' => ['class' => 'form-group col-md-3'],
+                        'options' => (function ($query) {
+                            return $query
+                                ->whereHas('code', function ($q) {
+                                    $q->where('description', 'Tipo Item EI');
+                                })->orderBy('description', 'ASC')
+                                ->get();
+                        }),
+                    ],
+                    [
+                        'label' => "Classificação",
+                        'type' => 'select2',
+                        'name' => 'situation_id', // the method that defines the relationship in your Model
+                        'entity' => 'situation', // the method that defines the relationship in your Model
+                        'model' => "App\Models\CodeItem", // foreign key model
+                        'attribute' => 'description', // foreign key attribute that is shown to user
+//                        'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+//                        'select_all' => true, // show Select All and Clear buttons?
+                        'wrapperAttributes' => ['class' => 'form-group col-md-3'],
+                        'options' => (function ($query) {
+                            return $query
+                                ->whereHas('code', function ($q) {
+                                    $q->where('description', 'Classificação Item');
+                                })->orderBy('description', 'ASC')
+                                ->get();
+                        }),
+                    ],
+                    [
+                        'name' => 'observation',
+                        'type' => 'text',
+                        'label' => 'Observação',
+                        'attributes' => [
+                            'onkeyup' => "maiuscula(this)"
+                        ],
+                        'wrapper' => ['class' => 'form-group col-md-4'],
+                    ],
+                    [
+                        'name' => 'amount',
+                        'type' => 'number',
+                        'label' => 'Quantidade',
+//                        'attributes' => ["step" => 'any'],
+                        'wrapper' => ['class' => 'form-group col-md-2'],
+                    ],
+                ],
+                'reorder' => false, // hide up&down arrows next to each row (no reordering)
                 'tab' => 'Espaço Infantil',
             ],
         ]);

@@ -20,14 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('state_id');
             $table->unsignedBigInteger('city_id');
             $table->string('ei_operating');//DM, DN, 2N, 3N, 4N, 5N, 6N, SN,
-            $table->boolean('computer')->default(false);
-            $table->boolean('printer')->default(false);
-            $table->boolean('internet')->default(false);
-            $table->boolean('tatami')->default(false);
-            $table->boolean('white_board')->default(false);
-            $table->boolean('cabinet')->default(false);
-            $table->integer('children_tables')->default(0);
-            $table->integer('children_chairs')->default(0);
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();

@@ -8,62 +8,59 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Church extends Model
+class ChurchItem extends Model
 {
+
     use CrudTrait;
     use HasFactory;
     use LogsActivity;
     use SoftDeletes;
-
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'churches';
+    protected $table = 'church_items';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
-        'structure_id',
-        'name',
-        'address',
-        'zip_code',
-        'state_id',
-        'city_id',
-        'ei_operating',
-        'status',
+        'church_id',
+        'item_type_id',
+        'situation_id',
+        'observation',
+        'amount'
     ];
-    // protected $hidden = [];
 
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getItemType()
+    {
+        return $this->itemtype->description;
+    }
+
+    public function getSituation()
+    {
+        return @$this->situation->description;
+    }
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function structure()
+    public function itemtype()
     {
-        return $this->belongsTo(Structure::class, 'structure_id');
-    }
-    public function state()
-    {
-        return $this->belongsTo(State::class, 'state_id');
-    }
-    public function city()
-    {
-        return $this->belongsTo(City::class, 'city_id');
+        return $this->belongsTo(CodeItem::class, 'item_type_id');
     }
 
-    public function items()
+    public function situation()
     {
-        return $this->hasMany(ChurchItem::class, 'church_id');
+        return $this->belongsTo(CodeItem::class, 'situation_id');
     }
 
     /*

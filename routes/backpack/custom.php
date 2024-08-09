@@ -19,16 +19,16 @@ Route::group([
 
     //Fetchs Routes
     Route::post('/church/fetch/city', '\App\Http\Controllers\Admin\ChurchCrudController@fetchCity');
-//    Route::post('/provider/fetch/cbo', '\App\Http\Controllers\Register\ProviderCrudController@fetchCbo');
-//    Route::get('/contract/fetch/cbo', '\App\Http\Controllers\Register\ContractCrudController@fetchCbo');
+    //    Route::post('/provider/fetch/cbo', '\App\Http\Controllers\Register\ProviderCrudController@fetchCbo');
+    //    Route::get('/contract/fetch/cbo', '\App\Http\Controllers\Register\ContractCrudController@fetchCbo');
 
-//    Route::group([
-//        'prefix' => 'api',
-//        'namespace' => 'Api',
-//    ], function () {
-//        Route::get('city', 'CityController@index');
-//        Route::get('city/{id}', 'CityController@show');
-//    });
+    //    Route::group([
+    //        'prefix' => 'api',
+    //        'namespace' => 'Api',
+    //    ], function () {
+    //        Route::get('city', 'CityController@index');
+    //        Route::get('city/{id}', 'CityController@show');
+    //    });
 
     Route::group([
         'namespace' => 'Admin',
@@ -42,6 +42,7 @@ Route::group([
         Route::crud('codigo/{code}/item', 'CodeItemCrudController');
         Route::crud('estrutura', 'StructureCrudController');
         Route::crud('igreja', 'ChurchCrudController');
+        Route::crud('image', 'ImageCrudController');
     });
 
     Route::group([
@@ -52,5 +53,4 @@ Route::group([
         Route::crud('prestador', 'ProviderCrudController');
         Route::crud('contrato', 'ContractCrudController');
     });
-
 });

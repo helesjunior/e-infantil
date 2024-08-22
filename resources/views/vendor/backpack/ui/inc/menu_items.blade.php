@@ -35,14 +35,13 @@
                     <x-backpack::menu-dropdown-item title="Estrutura" icon="la la-building" :link="backpack_url('/administracao/estrutura')" />
                 @endif
                 @if (backpack_user()->can('administracao_outros_igreja_acesso'))
-                    <x-backpack::menu-dropdown-item title="Igreja" icon="la la-church" :link="backpack_url('/administracao/image')" />
+                    <x-backpack::menu-dropdown-item title="Igreja" icon="la la-church" :link="backpack_url('/administracao/igreja')" />
                 @endif
-                {{--                @if (backpack_user()->can('administracao_outros_cbo_acesso')) --}}
-                {{--                    <x-backpack::menu-dropdown-item title="Cbo" icon="la la-hard-hat" --}}
-                {{--                                                    :link="backpack_url('/administracao/cbo')"/> --}}
-                {{--                @endif --}}
+                {{--  @if (backpack_user()->can('administracao_outros_cbo_acesso'))
+                    <x-backpack::menu-dropdown-item title="Cbo" icon="la la-hard-hat" :link="backpack_url('/administracao/cbo')" />
+                @endif  --}}
                 @if (backpack_user()->can('administracao_outros_igreja_acesso'))
-                    <x-backpack::menu-dropdown-item title="Images" icon="la la-question" :link="backpack_url('/administracao/image')" />
+                    <x-backpack::menu-dropdown-item title="Images" icon="la la-file-image" :link="backpack_url('/administracao/image')" />
                 @endif
             </x-backpack::menu-dropdown>
         @endif
